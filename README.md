@@ -1,2 +1,2 @@
 # ld2451
-golang library for hilink ld2551 board
+golang library for HiLink HLK LD2451 board
