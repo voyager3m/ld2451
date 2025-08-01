@@ -609,7 +609,10 @@ func (ld2451 *LD2451) ReadTarget() (Target, error) {
 
 func (ld2451 *LD2451) ReadTargetNoBlock() (*Target, error) {
 	select {
-	case target := <-ld2451.targets:
+	case target, ok := <-ld2451.targets:
+		if !ok {
+			return nil, nil
+		}
 		return &target, nil
 	case err := <-ld2451.errors:
 		return nil, err
