@@ -461,6 +461,12 @@ func (ld2451 *LD2451) StartReadThread() {
 	return
 }
 
+func (ld2451 *LD2451) StartSyncReadThread() {
+	ld2451.stop_read = make(chan bool)
+	ld2451.read_thread()
+	return
+}
+
 func (ld2451 *LD2451) StopReadThread() {
 	ld2451.stop_read <- true
 	ld2451.wg.Wait()
@@ -611,4 +617,3 @@ func (ld2451 *LD2451) ReadTargetNoBlock() (*Target, error) {
 		return nil, nil
 	}
 }
-
